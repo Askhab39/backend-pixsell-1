@@ -33,9 +33,10 @@ module.exports.gamesController = {
   },
   addReviewForGame: async (req, res) => {
     try {
-      const { userId, text, isPositiveGrade } = req.body;
+      const { id } = req.user
+      const { text, isPositiveGrade } = req.body;
       const reviews = await Reviews.create({
-        userId,
+        userId: id,
         text,
         isPositiveGrade,
       });
@@ -56,4 +57,12 @@ module.exports.gamesController = {
       res.json({ error: error.message });
     }
   },
+  printGames: async (req, res) => {
+    try {
+      const games = await Games.find().populate('reviews');
+      res.json(games)
+    } catch (error) {
+      res.json({ error: error.message });
+    }
+  }
 };
