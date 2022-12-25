@@ -1,3 +1,4 @@
+const Games = require("../models/Games.model");
 const Reviews = require("../models/Reviews.model");
 
 module.exports.reviewsController = {
@@ -15,8 +16,9 @@ module.exports.reviewsController = {
   existenceReview: async (req, res) => {
     try {
       const id = req.user.id
-      const reviews = await Reviews.find().populate('userId');
-      const existence = reviews.find((review => (review.userId._id).toString() === id))
+      const game = await Games.findById(req.params.id).populate('reviews')
+      const reviews = game.reviews;
+      const existence = reviews.find((review => review.userId.toString() === id))
       if(existence){
         return res.json(true)
       }
