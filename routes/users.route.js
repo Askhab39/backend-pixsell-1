@@ -2,8 +2,11 @@ const { userController } = require("../controllers/users.controller");
 const { Router } = require("express");
 const { check } = require("express-validator");
 const router = Router();
-// const authMiddleware = require("../middlewares/auth.middleware");
+const authMiddleware = require("../middlewares/auth.middleware");
 const roleMiddleware = require("../middlewares/role.middleware");
+// const {
+//   authSignUp,
+// } = require("../../../frontend-pixsell/src/reducers/Slice/registrationSlice");
 
 router.get("/users", roleMiddleware, userController.getAllUsers);
 router.post(
@@ -20,5 +23,5 @@ router.post(
 router.post("/login", userController.loginUser);
 router.post("/role", userController.createRoles);
 router.delete("/users/:id", roleMiddleware, userController.deleteUsers);
-
-module.exports = router;
+router.patch("/users/games/:gamesId", authMiddleware, userController.saveGames);
+module.exports = router; 

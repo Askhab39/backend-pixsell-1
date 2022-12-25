@@ -11,7 +11,19 @@ module.exports.userController = {
       const users = await User.find();
       res.json(users);
     } catch (e) {
-      console.log(e);
+      res.json({e: e.message});
+    }
+  },
+
+  saveGames: async (req, res) => {
+    try {
+      
+      const users = await User.findByIdAndUpdate(req.params.id, {
+        $push: { favorites: req.params.gamesId },
+      });
+      res.json(users);
+    } catch (error) {
+      res.json(error.message);
     }
   },
 
@@ -30,7 +42,7 @@ module.exports.userController = {
       const role = await Role.create({ value });
       res.json(role);
     } catch (error) {
-      console.log(error);
+      res.json({error: error.message});
     }
   },
 
@@ -114,7 +126,7 @@ module.exports.userController = {
       );
       res.json(token);
     } catch (error) {
-      console.log(error);
+      res.json({error: error.message});
     }
   },
 };
