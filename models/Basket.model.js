@@ -12,6 +12,7 @@ const basketSchema = mongoose.Schema({
         type: SchemaTypes.ObjectId,
         ref: "Games",
       },
+      price: Number
     },
   ],
   total: Number,

@@ -27,6 +27,15 @@ module.exports.userController = {
     }
   },
 
+  // getNameUsers: async(req,res) => {
+  //   try {
+  //     const users = await User.findById(req.params.id)
+  //     res.json(users.nickName);
+  //   } catch (error) {
+  //     res.json({error: error.message})
+  //   }
+  // },
+
   deleteUsers: async (req, res) => {
     try {
       const user = await User.findByIdAndRemove(req.params.id);
