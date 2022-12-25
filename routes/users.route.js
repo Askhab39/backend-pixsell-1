@@ -20,7 +20,7 @@ router.post(
   userController.registerUser
 );
 router.post("/login", userController.loginUser);
-router.post("/role",  userController.createRoles);
+router.post("/role", userController.createRoles);
 router.delete("/users/:id", roleMiddleware, userController.deleteUsers);
 router.patch('/users/walley', authMiddleware, walletControler.addingMoney)
 router.get("/users/wallet", authMiddleware, walletControler.getBalance);
