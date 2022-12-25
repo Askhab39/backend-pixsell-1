@@ -4,6 +4,8 @@ const { check } = require("express-validator");
 const router = Router();
 // const authMiddleware = require("../middlewares/auth.middleware");
 const roleMiddleware = require("../middlewares/role.middleware");
+const authMiddleware = require("../middlewares/auth.middleware");
+const { walletControler } = require("../controllers/wallet.controller");
 
 router.get("/users", roleMiddleware, userController.getAllUsers);
 router.post(
@@ -20,5 +22,8 @@ router.post(
 router.post("/login", userController.loginUser);
 router.post("/role",  userController.createRoles);
 router.delete("/users/:id", roleMiddleware, userController.deleteUsers);
+router.patch('/users/walley', authMiddleware, walletControler.addingMoney)
+router.get("/users/wallet", authMiddleware, walletControler.getBalance);
+
 
 module.exports = router;
