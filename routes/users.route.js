@@ -6,6 +6,7 @@ const router = Router();
 const roleMiddleware = require("../middlewares/role.middleware");
 
 router.get("/users", roleMiddleware, userController.getAllUsers);
+// router.get("/users/name/:id", userController.getNameUsers);
 router.post(
   "/auth",
   [check("usersName", "Имя пользователя не может быть пустым").notEmpty()],
