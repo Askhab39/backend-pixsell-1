@@ -8,6 +8,7 @@ const authMiddleware = require("../middlewares/auth.middleware");
 const { walletControler } = require("../controllers/wallet.controller");
 
 router.get("/users", roleMiddleware, userController.getAllUsers);
+// router.get("/users/name/:id", userController.getNameUsers);
 router.post(
   "/auth",
   [check("usersName", "Имя пользователя не может быть пустым").notEmpty()],

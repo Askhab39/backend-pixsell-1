@@ -7,7 +7,7 @@ const gamesModel = mongoose.Schema({
   description: String,
   date: String,
   genres: [],
-  reviews: [{ type: SchemaTypes.ObjectId, ref: "Reviews" }],
+  reviews: [{ type: SchemaTypes.ObjectId, ref: "Reviews"}],
   publisher: String,
   platform: [],
   price: Number,
