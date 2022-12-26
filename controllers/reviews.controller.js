@@ -13,20 +13,21 @@ module.exports.reviewsController = {
   getReviewForPrint: async (req, res) => {
     
   },
-  existenceReview: async (req, res) => {
-    try {
-      const id = req.user.id
-      const game = await Games.findById(req.params.id).populate('reviews')
-      const reviews = game.reviews;
-      const existence = reviews.find((review => review.userId.toString() === id))
-      if(existence){
-        return res.json(true)
-      }
-      res.json(false);
-    } catch (error) {
-      res.json({ error: error.message });
-    }
-  },
+  // existenceReview: async (req, res) => {
+  //   try {
+  //     const id = req.user.id
+  //     const game = await Games.findById(req.params.id).populate('reviews')
+  //     const reviews = await game.reviews;
+  //     const existence = await reviews.find((review => review.userId.toString() === id))
+  //     if(existence){
+  //       return res.json(true)
+  //     }
+  //     console.log("deadwadwadawd",existence)
+  //     res.json(false);
+  //   } catch (error) {
+  //     res.json({ error: error.message });
+  //   }
+  // },
   deleteReview: async (req, res) => {
     try {
       const reviews = await Reviews.findByIdAndRemove(req.params.id);
