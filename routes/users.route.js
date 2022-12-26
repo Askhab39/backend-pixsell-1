@@ -30,7 +30,6 @@ router.post("/role", userController.createRoles);
 router.delete("/users/:id", roleMiddleware, userController.deleteUsers);
 
 router.patch("/users/games/:id", authMiddleware, userController.saveGames);
-module.exports = router; 
 
 router.patch('/users/walley', authMiddleware, walletControler.addingMoney)
 router.get("/users/wallet", authMiddleware, walletControler.getBalance);
