@@ -38,7 +38,7 @@ module.exports.vacancyController = {
     try {
       const vacancy = await Vacancy.find();
       res.json(vacancy);
-    } catch (erroe) {
+    } catch (error) {
       res.json({ error: error.message });
     }
   },
@@ -47,7 +47,7 @@ module.exports.vacancyController = {
     try {
       const vacancy = await Vacancy.findById(req.params.id);
       res.json(vacancy);
-    } catch (erroe) {
+    } catch (error) {
       res.json({ error: error.message });
     }
   },
