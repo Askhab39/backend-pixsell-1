@@ -1,4 +1,3 @@
-
 const { Router } = require('express')
 const { gamesController } = require('../controllers/games.controller')
 const authMiddleware = require('../middlewares/auth.middleware')
