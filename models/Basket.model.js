@@ -9,7 +9,7 @@ const basketSchema = mongoose.Schema({
   products: [
     {
       productId: {
-        type: SchemaTypes.ObjectId,
+        type: mongoose.SchemaTypes.ObjectId,
         ref: "Games",
       },
       price: Number
