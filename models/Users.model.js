@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  favorites: [
+  favourites: [
     {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "Games",
