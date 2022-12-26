@@ -12,7 +12,7 @@ const roleMiddleware = require("../middlewares/role.middleware");
 const { walletControler } = require("../controllers/wallet.controller");
 
 
-router.get("/users", roleMiddleware, userController.getAllUsers);
+router.get("/users", authMiddleware, userController.getAllUsers);
 // router.get("/users/name/:id", userController.getNameUsers);
 router.post(
   "/auth",
@@ -28,7 +28,12 @@ router.post(
 router.post("/login", userController.loginUser);
 router.post("/role", userController.createRoles);
 router.delete("/users/:id", roleMiddleware, userController.deleteUsers);
-router.patch("/users/games/:gamesId", authMiddleware, userController.saveGames);
+
+router.patch("/users/games/:id", authMiddleware, userController.saveGames);
+
+
+// router.patch("/users/games/:gamesId", authMiddleware, userController.saveGames);
+
 router.patch('/users/walley', authMiddleware, walletControler.addingMoney)
 router.get("/users/wallet", authMiddleware, walletControler.getBalance);
 

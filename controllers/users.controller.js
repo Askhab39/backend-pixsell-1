@@ -17,11 +17,11 @@ module.exports.userController = {
 
   saveGames: async (req, res) => {
     try {
-      
       const users = await User.findByIdAndUpdate(req.params.id, {
-        $push: { favorites: req.params.gamesId },
+        $addToSet: { favourites: req.body.favourites },
       });
-      res.json(users);
+      const data = await users.populate("favourites");
+      res.json(data);
     } catch (error) {
       res.json(error.message);
     }
@@ -133,7 +133,7 @@ module.exports.userController = {
           expiresIn: "24h",
         }
       );
-      res.json(token);
+      res.json({token, id: payload.id});
     } catch (error) {
       res.json({error: error.message});
     }
