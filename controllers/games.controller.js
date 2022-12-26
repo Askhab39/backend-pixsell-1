@@ -1,5 +1,5 @@
-const Games = require("../models/Games.model");
-const Reviews = require("../models/Reviews.model");
+const Games = require('../models/Games.model');
+const Reviews = require('../models/Reviews.model');
 
 module.exports.gamesController = {
   addImageForGame: async (req, res) => {
@@ -24,17 +24,8 @@ module.exports.gamesController = {
   },
   addGame: async (req, res) => {
     try {
-      const {
-        images,
-        name,
-        description,
-        date,
-        genres,
-        publisher,
-        platform,
-        price,
-        discount,
-      } = req.body;
+      const { images, name, description, date, genres, publisher, platform, price, discount } =
+        req.body;
       const games = await Games.create({
         images,
         name,
@@ -53,15 +44,28 @@ module.exports.gamesController = {
   },
   addReviewForGame: async (req, res) => {
     try {
-      const { userId, text, isPositiveGrade } = req.body;
+      const { id } = req.user;
+      const { text, isPositiveGrade } = req.body;
       const reviews = await Reviews.create({
-        userId,
+        userId: id,
         text,
         isPositiveGrade,
       });
-      const games = await Games.findByIdAndUpdate(req.params.id, {
-        $addToSet: { reviews: [reviews._id] },
-      });
+      const games = await Games.findByIdAndUpdate(
+        req.params.id,
+        {
+          $addToSet: { reviews: [reviews._id] },
+        },
+        { new: true },
+      ).populate({
+        path: 'reviews',
+        populate: {
+          path: 'userId',
+          model: 'User',
+        },
+      });;
+
+      console.log(games);
       res.json(games);
     } catch (error) {
       res.json({ error: error.message });
@@ -71,9 +75,23 @@ module.exports.gamesController = {
     try {
       const { page = Math.floor(games.length / 2), limit = 2 } = req.query; //СДЕЛАТЬ ПРОВЕРКУ НА ЧЕТНОСТЬ
       const games = await Games.find()
-        .populate("reviews")
         .limit(limit * 1)
-        .skip((page - 1) * limit);
+        .skip((page - 1) * limit)
+        .populate({
+          path: 'reviews',
+          populate: {
+            path: 'userId',
+            model: 'User',
+          },
+        });
+      res.json(games);
+    } catch (error) {
+      res.json({ error: error.message });
+    }
+  },
+  printGames: async (req, res) => {
+    try {
+      const games = await Games.find().populate('reviews');
       res.json(games);
     } catch (error) {
       res.json({ error: error.message });
