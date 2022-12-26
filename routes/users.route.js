@@ -12,7 +12,7 @@ const roleMiddleware = require("../middlewares/role.middleware");
 const { walletControler } = require("../controllers/wallet.controller");
 
 
-router.get("/users", authMiddleware, userController.getAllUsers);
+router.get("/users", userController.getAllUsers);
 // router.get("/users/name/:id", userController.getNameUsers);
 router.post(
   "/auth",

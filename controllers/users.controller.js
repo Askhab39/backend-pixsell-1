@@ -125,6 +125,7 @@ module.exports.userController = {
         email: candidate.email,
         roles: candidate.roles,
         basket: basket._id,
+        // wallet: candidate.walletAmount
       };
       const token = await jsonwebtoken.sign(
         payload,

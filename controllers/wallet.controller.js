@@ -12,11 +12,13 @@ module.exports.walletControler = {
     addingMoney: async (req, res) => {
         try {
             const { walletAmount } = req.body
+            console.log(walletAmount);
             const user = await User.findById(req.user.id)
-            const wallet = await User.findByIdAndUpdate(req.user.id, {
-                walletAmount: user.walletAmount + walletAmount
+           await User.findByIdAndUpdate(req.user.id, {
+                walletAmount: Number(user.walletAmount) + Number(walletAmount)
             })
-            res.json(wallet)
+            console.log(walletAmount, typeof walletAmount, typeof user.walletAmount);
+            res.json(user)
             // const currentWallet = await User.findById(req.user.id).walletAmount
             // console.log(req.user);
             // const wallet = await User.findByIdAndUpdate(req.user.id, {
