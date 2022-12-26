@@ -20,7 +20,7 @@ module.exports.userController = {
       const users = await User.findByIdAndUpdate(req.params.id, {
         $addToSet: { favourites: req.body.favourites },
       });
-      const data = await users.populate("favourites");
+      const data = await users.populate("games");
       res.json(data);
     } catch (error) {
       res.json(error.message);
