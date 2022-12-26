@@ -7,4 +7,5 @@ router.use(require('./games.route'))
 router.use(require('./reviews.route'))
 router.use(require('./basket.route'))
 router.use(require('./response.route'))
+router.use(require('./promo.route'))
 module.exports = router
