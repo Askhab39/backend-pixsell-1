@@ -31,6 +31,9 @@ router.delete("/users/:id", roleMiddleware, userController.deleteUsers);
 
 router.patch("/users/games/:id", authMiddleware, userController.saveGames);
 
+
+// router.patch("/users/games/:gamesId", authMiddleware, userController.saveGames);
+
 router.patch('/users/walley', authMiddleware, walletControler.addingMoney)
 router.get("/users/wallet", authMiddleware, walletControler.getBalance);
 
