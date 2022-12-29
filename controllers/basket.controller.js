@@ -5,7 +5,6 @@ module.exports.basketController = {
   getBasketByUSer: async (req, res) => {
     try {
       const data = await Basket.findOne({ userId: req.user.id });
-      // console.log("DATA", req.user.id)
       return res.json(data);
     } catch (error) {
       res.json({ error: error.message });
@@ -13,16 +12,31 @@ module.exports.basketController = {
   },
   // ДОБАВЛЕНИЕ ТОВАРА В КОРЗИНУ
   addProductBasket: async (req, res) => {
-    console.log(req.user.id + " 111");
+    console.log(req.body.product.productId);
     try {
-      const data = await Basket.findOneAndUpdate({userId: req.user.id},
-        {
+      const userBasket = await Basket.findOne({ userId: req.user.id });
+      let test = 0;
+      userBasket.products.filter((item) => {
+        if (String(item.productId) === String(req.body.product.productId)) {
+          test += 1;
+        }
+      });
+      if (test === 0) {
+        const data = await Basket.findOneAndUpdate(
+          { userId: req.user.id },
+
+          {
             $addToSet: {
               products: req.body.product,
             },
-          },{new:true})
-          res.json(data)
-    const res = await Basket.find()
+          },
+          { new: true }
+        );
+        res.json(data);
+        const res = await Basket.find();
+        res.json(res);
+      }
+      const res = await Basket.find();
       // const data = await Basket.findByIdAndUpdate(req.params.id, {
       //   $addToSet: {
       //     products: req.body.product,

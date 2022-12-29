@@ -13,7 +13,7 @@ module.exports = async (req, res, next) => {
 
   try {
     req.user = await jsonwebtoken.verify(token, process.env.SECRET_JWT_KEY);
-    console.log(process.env.SECRET_JWT_KEY);
+   
 
     next();
   } catch (error) {

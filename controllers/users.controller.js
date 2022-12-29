@@ -86,7 +86,7 @@ module.exports.userController = {
       await user.save();
       res.json({ error: "Пользователь успешно зарегистрирован" });
     } catch (error) {
-      console.log(error);
+
       res.status(401).json(error.message);
     }
   },
@@ -117,7 +117,7 @@ module.exports.userController = {
       if (basket === null) {
         await Basket.create({ userId: candidate._id });
       }
-      console.log("basket", basket);
+
 
       const payload = {
         id: candidate._id,
