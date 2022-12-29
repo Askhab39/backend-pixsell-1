@@ -4,7 +4,7 @@ const Response = require("../models/Response.model");
 module.exports.responseController = {
   postResponse: async (req, res) => {
     try {
-        console.log(req.body);
+
       const { name, email, phone, commit } = req.body;
       const response = await Response.create({
         name,

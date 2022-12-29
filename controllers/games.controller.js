@@ -65,7 +65,6 @@ module.exports.gamesController = {
         },
       });;
 
-      console.log(games);
       res.json(games);
     } catch (error) {
       res.json({ error: error.message });

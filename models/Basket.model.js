@@ -14,7 +14,7 @@ const basketSchema = mongoose.Schema({
       },
       price: Number
     },
-  ],
+  ],  
   total: Number,
 });
 
